@@ -10,10 +10,6 @@
         android:name="com.route4me.notesapp.ui.notes.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" >
-        <argument
-            android:name="id"
-            app:argType="integer"
-            android:defaultValue="1" />
         <action
             android:id="@+id/action_notesFragment_to_noteDetailFragment"
             app:destination="@id/noteDetailFragment" />
@@ -23,6 +19,13 @@
         android:id="@+id/noteDetailFragment"
         android:name="com.route4me.notesapp.ui.note_detail.NoteDetailFragment"
         android:label="fragment_note_detail"
-        tools:layout="@layout/fragment_note_detail" />
+        tools:layout="@layout/fragment_note_detail" >
+
+        <argument
+            android:name="note"
+            app:nullable="true"
+            app:argType="com.route4me.notesapp.db.NoteEntity" />
+
+    </fragment>
 
 </navigation>

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.route4me.notesapp.db.NoteDao
 import com.route4me.notesapp.db.NoteDatabase
-import com.route4me.notesapp.repository.NotesRepository
+import com.route4me.notesapp.repository.MainRepository
 import com.route4me.notesapp.utils.DB_NAME
 import dagger.Module
 import dagger.Provides
@@ -22,6 +22,6 @@ class AppModule {
     ).build().dao()
 
     @Provides
-    fun provideNotesRepository(dao: NoteDao) = NotesRepository(dao)
+    fun provideNotesRepository(dao: NoteDao) = MainRepository(dao)
 
 }

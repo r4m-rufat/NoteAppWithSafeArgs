@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.route4me.notesapp.R
 import com.route4me.notesapp.databinding.FragmentNotesBinding
+import com.route4me.notesapp.db.NoteEntity
 import com.route4me.notesapp.listeners.OnClickedItemListener
+import com.route4me.notesapp.ui.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +21,7 @@ class NotesFragment : Fragment(), OnClickedItemListener {
     private var _binding: FragmentNotesBinding? = null
     private val binding
     get() = _binding as FragmentNotesBinding
-    private val viewModel by viewModels<NotesFragmentViewModel>()
+    private val viewModel by activityViewModels<MainActivityViewModel>()
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var contex: Context
 
@@ -41,7 +42,7 @@ class NotesFragment : Fragment(), OnClickedItemListener {
     private fun observeNotes() {
 
         viewModel.getNotes()
-        viewModel.list.observe(requireActivity()) { noteList ->
+        viewModel.list.observe(viewLifecycleOwner) { noteList ->
 
             noteAdapter.updateList(noteList)
 
@@ -64,7 +65,8 @@ class NotesFragment : Fragment(), OnClickedItemListener {
     private fun clickedAddButton() {
 
         binding.icAdd.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_notesFragment_to_noteDetailFragment)
+            val action = NotesFragmentDirections.actionNotesFragmentToNoteDetailFragment(null)
+            findNavController().navigate(action)
         }
 
     }
@@ -74,9 +76,10 @@ class NotesFragment : Fragment(), OnClickedItemListener {
         _binding = null
     }
 
-    override fun clickedNoteItem(id: Int) {
+    override fun clickedNoteItem(note: NoteEntity) {
 
-        val action = NotesFragmentDirections.actionNotesFragmentToNoteDetailFragment()
+        val action = NotesFragmentDirections.actionNotesFragmentToNoteDetailFragment(note)
+        findNavController().navigate(action)
 
     }
 }

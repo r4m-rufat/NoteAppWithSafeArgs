@@ -35,7 +35,7 @@ class NoteAdapter(
         holder.description.text = list[position].description
 
         holder.itemView.setOnClickListener {
-            listener.clickedNoteItem(list[position].id)
+            listener.clickedNoteItem(list[position])
         }
 
     }
