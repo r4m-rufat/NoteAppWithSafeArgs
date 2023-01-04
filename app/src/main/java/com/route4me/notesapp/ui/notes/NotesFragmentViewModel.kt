@@ -1,4 +1,4 @@
-package com.route4me.notesapp.ui
+package com.route4me.notesapp.ui.notes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject
+class NotesFragmentViewModel @Inject
 constructor(
     private val repository: NotesRepository
 ) : ViewModel() {

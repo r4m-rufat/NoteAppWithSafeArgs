@@ -1,7 +1,7 @@
 package com.route4me.notesapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.route4me.notesapp.R
 import dagger.hilt.android.AndroidEntryPoint
 

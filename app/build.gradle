@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id "androidx.navigation.safeargs"
 }
 
 android {
@@ -42,7 +43,7 @@ dependencies {
 
     def hilt_version = "2.42"
     def lifecycle_version = "2.5.1"
-    def nav_version = "2.3.5"
+    def nav_version = "2.5.3"
     def room_version = "2.4.3"
 
     implementation 'androidx.core:core-ktx:1.7.0'

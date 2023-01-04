@@ -9,10 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.route4me.notesapp.R
 import com.route4me.notesapp.db.NoteEntity
+import com.route4me.notesapp.listeners.OnClickedItemListener
 
 class NoteAdapter(
     private val context: Context,
-    private var list: List<NoteEntity>
+    private var list: List<NoteEntity>,
+    private val listener: OnClickedItemListener
 ) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
@@ -31,6 +33,11 @@ class NoteAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = list[position].title
         holder.description.text = list[position].description
+
+        holder.itemView.setOnClickListener {
+            listener.clickedNoteItem(list[position].id)
+        }
+
     }
 
     override fun getItemCount(): Int {

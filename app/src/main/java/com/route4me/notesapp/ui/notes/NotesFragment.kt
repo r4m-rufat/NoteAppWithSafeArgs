@@ -1,30 +1,26 @@
 package com.route4me.notesapp.ui.notes
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.route4me.notesapp.R
 import com.route4me.notesapp.databinding.FragmentNotesBinding
-import com.route4me.notesapp.ui.MainActivityViewModel
+import com.route4me.notesapp.listeners.OnClickedItemListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NotesFragment : Fragment() {
+class NotesFragment : Fragment(), OnClickedItemListener {
 
     private var _binding: FragmentNotesBinding? = null
     private val binding
     get() = _binding as FragmentNotesBinding
-    private val viewModel by viewModels<MainActivityViewModel>()
+    private val viewModel by viewModels<NotesFragmentViewModel>()
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var contex: Context
 
@@ -36,7 +32,6 @@ class NotesFragment : Fragment() {
 
         _binding = FragmentNotesBinding.inflate(layoutInflater)
         contex = requireContext()
-        Log.d(TAG, "onCreateView: vies yene")
         setupAdapter()
         observeNotes()
         clickedAddButton()
@@ -56,7 +51,7 @@ class NotesFragment : Fragment() {
 
     private fun setupAdapter() {
 
-        noteAdapter = NoteAdapter(contex, emptyList())
+        noteAdapter = NoteAdapter(contex, emptyList(), this)
         binding.recyclerNotes.apply {
 
             setHasFixedSize(true)
@@ -79,4 +74,9 @@ class NotesFragment : Fragment() {
         _binding = null
     }
 
+    override fun clickedNoteItem(id: Int) {
+
+        val action = NotesFragmentDirections.actionNotesFragmentToNoteDetailFragment()
+
+    }
 }

@@ -5,12 +5,15 @@
     android:id="@+id/home_graph"
     app:startDestination="@id/notesFragment">
 
-
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.route4me.notesapp.ui.notes.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="1" />
         <action
             android:id="@+id/action_notesFragment_to_noteDetailFragment"
             app:destination="@id/noteDetailFragment" />
@@ -19,6 +22,7 @@
     <fragment
         android:id="@+id/noteDetailFragment"
         android:name="com.route4me.notesapp.ui.note_detail.NoteDetailFragment"
-        android:label="NoteDetailFragment" />
+        android:label="fragment_note_detail"
+        tools:layout="@layout/fragment_note_detail" />
 
 </navigation>
